@@ -29,8 +29,8 @@ app.get(`/*/contact`, (req, res) => {
     res.send('Contact');
 })
 let path= "*";
-app.all('*', (req, res) => {
+app.all(/^\/[A-Za-z0-9\-_]*$/, (req, res) => {
     let method= 'all';
     let random= Math.floor(Math.random() * 10);
-    res.render('template', { method: `${method}`, path: `${path}`, random: `${random}` });
+    res.render('template', { method: req.method, path: req.path, random: `${random}` });
 })
